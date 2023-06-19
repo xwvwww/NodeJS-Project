@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Text Editor</h1>
+      <form action="/txt" method="post">
+        <textarea class="defaultCl" name="text" cols="30" rows="10"></textarea>
+        <button class="bolder" type="button">Bold font</button>
+        <button class="italic" type="button">Italic Font</button>
+        <button class="standart" type="button">Standart Forn</button>
+        <button class="sender">Отправить</button>
+      </form>
+      <div class="CurrentData">
+        <h2>Current Data</h2>
+
+        <form method="post" class="formich" action="/redact">
+          <input class="subBut" type="submit" value="Save">
+        </form>
+      </div>
+    </header>
+
+    <script src="/static/index.js"></script>
+    <script>
+
+            (function () {
+        $.getJSON("/static/textich.json", function (data) {
+          data.forEach(element => {
+            $(".formich").append($("<p class='dada'>").html(`<input type="text" name="text" size="40" value="${element.text}" readonly></p> <button type='button' class='redact'>Edit</button> <button type='button'  class='deleter'>Delete</button>`));
+          });
+        })
+      })();
+
+
+      $( document ).ready(function() {
+        function deleter1(){
+          const deleter = document.querySelectorAll('.deleter');
+          const redactor = document.querySelectorAll('.redact');
+
+
+          redactor.forEach(function(elem){
+            elem.addEventListener('click',function(){
+              elem.parentElement.firstChild.removeAttribute("readonly");
+
+              
+      })
+    })
+
+          deleter.forEach(function(el){
+          el.addEventListener('click',function(){
+            el.parentElement.firstChild.value = "";
+          el.parentElement.remove();
+          
+      })
+    })
+}
+     setTimeout(deleter1, 500);
+});
+  
+    </script>
+  </body>
+</html>
